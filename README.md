@@ -1,26 +1,41 @@
 
-# BMC Helix Datasource
+# Broadcom Continuous Delivery Director (CDD) Datasource
 
-This is a Grafana datasource for fetching Metrics, Events & logs from Helix Monitor, Helix Remediate & Helix Optimize products
+This is a Grafana datasource for fetching Metrics from Continuous Delivery Director
 
 ## Requirements
 
-Grafana 7.3.1+ is required.
+Grafana XXXX 
 
-BMC Helix v21.02+ license/subscription is required
+Continuous Delivery Director v8.3 (or above)  or CDD SaaS subscription
 
 ## Features
 
-- Supports Lucene queries to fetch Events & Logs
-- Supports Promql & Metricql to fetch Metrics data 
-- Utilizes BMC Helix REST API's
-- Secured authentication via access key and secret key
+Get release quality continuous testing metrics:
+- Total number of test suites
+- Total number of successful test suites
+- Total number of failed test suites
+- Total number of error test suites
+- Total number of skipped test suites
+- Total number of disabled test suites
+
+query Paraemters:
+- Project Name
+- Application Name
+- Application Nane
+- Application Version Name
+- Environment Name
+- Plugin Name
+
+
+Select one or more plugin
+If a plugin was entered, reply with information on all the plugins
 
 ## Configuration
 
 This datasource uses the Instana REST API to query the underlying data services.
 
-First of all you will need to generate an Access key & Secret key in BMC Helix portal ([Keys](https://docs.bmc.com/docs/BMCHelixPortal/setting-up-api-users-for-programmatic-access-967330979.html))
+First of all you will need to generate an API key (recomanded to use an integration user) 
 
 Configure Retrived values as shown below
 
@@ -30,9 +45,20 @@ Configure Retrived values as shown below
 - - - -
 ### Query Types
 The following query types are available:
-* CloudSecurity
+* <metric name>:
 
-   Use this query type to fetch compliance data of the devices in your environment.
+   Use this query type to fetch ccontinuous testing metrics.
+   
+   
+- Total number of test suites
+- Total number of successful test suites
+- Total number of failed test suites
+- Total number of error test suites
+- Total number of skipped test suites
+- Total number of disabled test suites
+   
+   
+   
 * Events
 
   Use this query type to fetch event data on the devices in your environment.
@@ -44,11 +70,7 @@ The following query types are available:
 
 This section describes the each query editor.
 
-### **Cloud Security**
-
-The following image displays the CloudSecurity query type:
-
-![query type](https://raw.githubusercontent.com/bmcsoftware/bmchelix-datasource/main/screenshots/cloudSecurity_query.png)
+#
 
 This query type requires the following data:
 
