@@ -1,5 +1,5 @@
 
-![](https://raw.githubusercontent.com/broadcom/broadcomcdd-datasource/master/screenshots/CA-Broadcom_Horizontal_red-black.png?v=4&s=20)
+<img src="https://raw.githubusercontent.com/broadcom/broadcomcdd-datasource/master/screenshots/CA-Broadcom_Horizontal_red-black.png" width="300">
 # Broadcom Continuous Delivery Director (CDD) Datasource
 
 This is a Grafana datasource for fetching Metrics from Continuous Delivery Director
