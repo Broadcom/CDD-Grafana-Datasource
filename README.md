@@ -1,5 +1,5 @@
 
-<img src="https://raw.githubusercontent.com/broadcom/broadcomcdd-datasource/master/screenshots/CA-Broadcom_Horizontal_red-black.png" width="300">
+<img src="https://raw.githubusercontent.com/broadcom/broadcomcdd-datasource/master/screenshots/CA-Broadcom_Horizontal_red-black.png" width="200">
 
 
 # Broadcom Continuous Delivery Director (CDD) Datasource
@@ -8,7 +8,7 @@ This is a Grafana datasource for fetching Metrics from Continuous Delivery Direc
 
 ## Requirements
 
-Grafana XXXX 
+Grafana version XXX 
 
 Continuous Delivery Director v8.3 (or above)  or CDD SaaS subscription
 
