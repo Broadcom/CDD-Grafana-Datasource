@@ -27,7 +27,7 @@ To configure a CDD data source:
 3. Copy the API key and tenant ID that are used to authenticate user access to CDD REST APIs.
 4. In Grafana, on the CDD data source settings page, paste the CDD API key and tenant ID.
 
-![screenshot datasource editor](https://github.com/Broadcom/broadcomcdd-datasource/tree/master/readme_images/blob/master/readme_images/screenshot_datasource_editor.png)
+![screenshot datasource editor](https://github.com/Broadcom/broadcomcdd-datasource/readme_images/blob/master/readme_images/screenshot_datasource_editor.png)
 
 
 # Usage
