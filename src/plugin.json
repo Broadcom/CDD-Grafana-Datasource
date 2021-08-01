@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "Continuous Delivery Director",
+  "id": "broadcomcdd-datasource",
+  "metrics": true,
+  "annotations": true,
+  "info": {
+    "description": "Broadcom plugin connecting Grafana to Continuous Delivery Director",
+    "author": {
+      "name": "Broadcom",
+      "url": "https://www.broadcom.com"
+    },
+    "keywords": ["Broadcom", "CDD", "Continuous Delivery Director"],
+    "logos": {
+      "small": "img/ca_logo.svg",
+      "large": "img/ca_logo.svg"
+    },
+    "links": [
+      {
+        "name": "CDD SaaS Homepage",
+        "url": "https://cddirector.io"
+      },
+      {
+        "name": "Support Site",
+        "url": "https://support.broadcom.com/enterprise-software"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/Broadcom/broadcomcdd-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  },
+  "routes": [
+    {
+      "path": "reportingRoute",
+      "url": "{{ .JsonData.serverURL }}/cdd/reporting/{{ .JsonData.tenantId }}/v1/",
+      "headers": [
+        {
+          "name": "Authorization",
+          "content": "Bearer {{ .SecureJsonData.apiKey }}"
+        }
+      ]
+    }
+  ]
+}
