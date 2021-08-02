@@ -27,7 +27,7 @@ To configure a CDD data source:
 3. Copy the API key and tenant ID that are used to authenticate user access to CDD REST APIs.
 4. In Grafana, on the CDD data source settings page, paste the CDD API key and tenant ID.
 
-![screenshot datasource editor](https://github.com/Broadcom/broadcomcdd-datasource/blob/master/readme_images/screenshot_datasource_editor.png)
+![screenshot datasource editor](https://ent.box.com/shared/static/z6zbfns1ghwff03lvk36fxoai99b3h86.png)
 
 
 # Usage
@@ -51,7 +51,7 @@ This section describes the query editor.
 
 The following image displays the Total number of test suites query type:
 
-![screenshot query editor](https://github.com/Broadcom/broadcomcdd-datasource/blob/master/readme_images/screenshot_query_editor.png)
+![screenshot query editor](https://ent.box.com/s/z6zbfns1ghwff03lvk36fxoai99b3h86)
 
  
 This query type requires the following data:
