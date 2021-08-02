@@ -51,7 +51,7 @@ This section describes the query editor.
 
 The following image displays the Total number of test suites query type:
 
-![screenshot query editor](https://ent.box.com/s/z6zbfns1ghwff03lvk36fxoai99b3h86)
+![screenshot query editor](https://ent.box.com/shared/static/j5tr5ceywr5obwvcx7asvov1o1022w0n.png)
 
  
 This query type requires the following data:
