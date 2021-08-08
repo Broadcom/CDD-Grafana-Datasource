@@ -4,8 +4,6 @@ import { DataQuery, DataSourceJsonData, SelectableValue } from '@grafana/data';
  * CONSTANTS
  */
 
-export const pluginId = 'Continuous Delivery Director';
-
 export const optionsPeriod: Array<SelectableValue<string>> = [];
 const optionPeriod1: SelectableValue = { label: 'Minute', value: 'MINUTE' };
 const optionPeriod2: SelectableValue = { label: 'Hour', value: 'HOUR' };
@@ -20,20 +18,27 @@ optionsPeriod.push(optionPeriod4);
 optionsPeriod.push(optionPeriod5);
 optionsPeriod.push(optionPeriod6);
 
-export const grafanaQueryBuiltInFields = new Set<string>();
-grafanaQueryBuiltInFields.add('datasource');
-grafanaQueryBuiltInFields.add('hide');
-grafanaQueryBuiltInFields.add('period');
-grafanaQueryBuiltInFields.add('queryMetric');
-grafanaQueryBuiltInFields.add('queryType');
-grafanaQueryBuiltInFields.add('refId');
-
 let initialMetric = [] as any;
 export function setInitialMetric(metric: string) {
   initialMetric = metric;
 }
 export function getInitialMetric() {
   return initialMetric;
+}
+
+/* current fields are saved here to be available both in QueryEditor.ts and datasource.ts. 
+They are needed since the "query" object in QueryEditor.ts is not cleaned, 
+and when changing the field Data Source in the Query Editor page, 
+fields from the prev data source are still kept in "query"  */
+let currentFields = new Map<string, CddField>();
+export function clearCurrentFields() {
+  currentFields.clear();
+}
+export function setCurrentField(fieldId: string, cddField: CddField) {
+  currentFields.set(fieldId, cddField);
+}
+export function getCurrentFields() {
+  return currentFields;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { getBackendSrv, getDataSourceSrv } from '@grafana/runtime';
+import { getBackendSrv, getTemplateSrv } from '@grafana/runtime';
 import {
   DataQueryRequest,
   DataQueryResponse,
@@ -8,23 +8,17 @@ import {
   FieldType,
   DateTime,
 } from '@grafana/data';
-import {
-  pluginId,
-  grafanaQueryBuiltInFields,
-  optionsPeriod,
-  CddQuery,
-  CddDataSourceOptions,
-  getInitialMetric,
-} from './types';
+import { optionsPeriod, CddQuery, CddDataSourceOptions, getInitialMetric, getCurrentFields } from './types';
 
 export class DataSource extends DataSourceApi<CddQuery, CddDataSourceOptions> {
-  url: string = getDataSourceSrv().getInstanceSettings(pluginId)?.url + '/reportingRoute' || ''; // reportingRoute is the path in plugin.json
+  url: string;
   annotations = {};
   errorMessage =
     'Check the connectivity to the CDD server and make sure that the CDD server configuration in Grafana is correct (URL, Tenant ID, and API Key).';
 
   constructor(instanceSettings: DataSourceInstanceSettings<CddDataSourceOptions>) {
     super(instanceSettings);
+    this.url = instanceSettings.url + '/reportingRoute'; // reportingRoute is the path in plugin.json
   }
 
   async doRequest(options: DataQueryRequest<CddQuery>, params) {
@@ -40,15 +34,18 @@ export class DataSource extends DataSourceApi<CddQuery, CddDataSourceOptions> {
       }
     }
     const fields = [] as any;
-    for (let idx in params) {
-      if (!grafanaQueryBuiltInFields.has(idx) && params[idx] !== '') {
+    const currentFields = getCurrentFields();
+    currentFields.forEach((value, key) => {
+      if (params[key] !== undefined && params[key] !== '') {
         const field = {};
-        const fieldName = { tagName: idx };
+        const fieldName = { tagName: key };
         field['monitoringMetricTag'] = fieldName;
-        field['tagValueName'] = params[idx];
+        const fieldValue = getTemplateSrv().replace(params[key], options.scopedVars); // replace Grafana variable with the selected value in the UI by user (if not variable it returns the same value)
+        field['tagValueName'] = fieldValue;
         fields.push(field);
       }
-    }
+    });
+
     const body = {
       monitoringMetricName: params.queryMetric || initialMetric,
       monitoringMetricTags: fields,
@@ -71,9 +68,8 @@ export class DataSource extends DataSourceApi<CddQuery, CddDataSourceOptions> {
       });
       return result;
     } catch (error) {
-      const errorMessage = 'Function doRequest() failed. ' + this.errorMessage;
-      console.error(errorMessage, error);
-      throw new Error(errorMessage);
+      console.error(this.errorMessage, error);
+      throw new Error(this.errorMessage);
     }
   }
 
@@ -84,11 +80,11 @@ export class DataSource extends DataSourceApi<CddQuery, CddDataSourceOptions> {
           refId: params.refId,
           fields: [
             { name: 'Time', type: FieldType.time },
-            { name: 'Average Metric Value', type: FieldType.number },
-            { name: 'Total Metric Value', type: FieldType.number },
-            { name: 'Minimum Metric Value', type: FieldType.number },
-            { name: 'Maximum Metric Value', type: FieldType.number },
-            { name: 'Last Metric Value', type: FieldType.number },
+            { name: 'Average', type: FieldType.number },
+            { name: 'Total', type: FieldType.number },
+            { name: 'Minimum', type: FieldType.number },
+            { name: 'Maximum', type: FieldType.number },
+            { name: 'Last Value', type: FieldType.number },
           ],
         });
         if (response.data?.data?.length > 0) {
